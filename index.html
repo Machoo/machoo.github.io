@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html>
     <title>Pikmin 3 Deluxe Countdown</title>
-    <div class="pikmin">
-        hello
+    <div class="imgBox">
+        <img class="center-fit" src="backgroundImg.jpg"></img>
+    </div>
+    <div class="pikmin" id="pik">
+        86 days
     </div>
 </html>
+
+<script>
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var hour = d.getHours();
+    var daysLeft = 0;
+    var hoursLeft = 23 - hour;
+    
+    if (month == 10) {
+        daysLeft = 30 - day;
+    } else if (month == 9) {
+        daysLeft = 30 + 30 - day;
+    } else if (month == 8) {
+        daysLeft = 30 + 30 + 31 - day;
+    }
+    document.getElementById("pik").innerHTML = daysLeft + " days, " + hoursLeft + " hours";
+</script>
 
 <style>
     @font-face {
@@ -12,8 +33,31 @@
         src: url('pikmin_by_theadorableoshawott-da33cfr.ttf');
     }
 
+    * {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .imgBox {
+        display: grid;
+        width: 100%;
+    }
+
+    .center-fit {
+        max-width: 100%;
+        max-height: 100%;
+        margin: auto;
+    }
+
     .pikmin {
         font-family: 'pikpik';
-        font-size: 50px;
+        font-size: 100px;
+        color: white;
+        text-align: center;
+        padding-top: 100px;
+        position: fixed;
+        top: 0px;
+        width: 100%;
     }
 </style>
