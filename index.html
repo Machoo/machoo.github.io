@@ -16,7 +16,6 @@
     var hour = d.getHours();
     var daysLeft = 0;
     var hoursLeft = 23 - hour;
-    
     if (month == 10) {
         daysLeft = 30 - day;
     } else if (month == 9) {
@@ -24,7 +23,31 @@
     } else if (month == 8) {
         daysLeft = 30 + 30 + 31 - day;
     }
+    console.log("daysLeft: " + daysLeft + ", hoursLeft: " + hoursLeft);
     document.getElementById("pik").innerHTML = daysLeft + " days, " + hoursLeft + " hours";
+
+    var counter = 0;
+    var loopy = setInterval(function() {
+        counter += 1;
+        if (counter >= 48) {
+            clearInterval(loopy);
+        }
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var hour = d.getHours();
+        var daysLeft = 0;
+        var hoursLeft = 23 - hour;
+        if (month == 10) {
+            daysLeft = 30 - day;
+        } else if (month == 9) {
+            daysLeft = 30 + 30 - day;
+        } else if (month == 8) {
+            daysLeft = 30 + 30 + 31 - day;
+        }
+        console.log("daysLeft: " + daysLeft + ", hoursLeft: " + hoursLeft);
+        document.getElementById("pik").innerHTML = daysLeft + " days, " + hoursLeft + " hours";
+    }, 900000);
 </script>
 
 <style>
