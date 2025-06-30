@@ -1,0 +1,123 @@
+html {
+    background: rgb(45, 70, 80);
+    color: rgb(255, 255, 255);
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 16px;
+}
+
+.main {
+    background: rgb(50, 90, 100);
+    border-radius: 15px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    margin: 2rem auto;
+    max-width: 900px;
+    padding: 2rem 2rem;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    color: rgb(220, 220, 220);
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin-bottom: 1.0rem;
+}
+
+.project_cards_group {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.project_card {
+    background: rgb(60, 110, 120);
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+    padding: 1.2rem 1rem 1rem 1rem;
+}
+
+.project_card:focus-within,
+.project_card:hover {
+    background: rgb(60, 115, 125);
+    outline: 2px solid rgb(230, 255, 255);
+}
+
+.project_card_title {
+    color: rgb(255, 255, 255);
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.project_card_text {
+    color: rgb(230, 230, 230);
+    flex: 1;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.project_card_link {
+    align-self: flex-start;
+    background: rgb(120, 150, 155);
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: rgb(20, 20, 255);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.9rem;
+    text-align: center;
+    text-decoration: underline;
+    width: 100%;
+}
+
+.project_card_link:focus-within,
+.project_card_link:hover {
+    background: rgb(125, 155, 160);
+    outline: 2px solid rgb(230, 255, 255);
+}
+
+
+
+/* Styling for project pages */
+.card {
+    background: rgb(55, 105, 115);
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+.card:focus-within,
+.card:hover {
+    background: rgb(60, 110, 120);
+}
+
+.page_header_container {
+    align-items: center;
+    display: flex;
+}
+
+.home_card_link {
+    background: rgb(120, 150, 155);
+    border-radius: 5px;
+    color: rgb(20, 20, 255);
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: auto;
+    padding: 0.9rem;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.home_card_link:focus-within,
+.home_card_link:hover {
+    background: rgb(125, 155, 160);
+    outline: 2px solid rgb(230, 255, 255);
+}

@@ -1,86 +1,99 @@
 <!DOCTYPE html>
-<html>
-    <title>Pikmin 3 Deluxe Countdown</title>
-    <div class="imgBox">
-        <img class="center-fit" src="backgroundImg.jpg"></img>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Matthew's Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main">
+        <h1>
+            Hello, welcome to Matthew Kind's Projects Page
+        </h1>
+        <p>
+            This is the general home page for many of the projects I've worked on in the past, as well as ones I'm currently working on.
+        </p>
+        <p>
+            Below are brief descriptions of each of the projects as well as links to pages with more details.
+        </p>
+        <p>
+            Note that some projects are based on school work, meaning I can't show them in their entirety.
+        </p>
+
+        <section class="project_cards_group" aria-label="Project list">
+            <article class="project_card">
+                <h2 class="project_card_title">Audio Visualizer</h2>
+                <p class="project_card_text">
+                    This is my current project where I'm combining MatPlotLib and libROSA to create a typical audio
+                    visualizer across two axes, plus a third axis for time.
+                </p>
+                <a class="project_card_link" href="./pages/AudioVisualizer/AudioVisualizer.html"
+                    aria-label="View Audio Visualizer project">View Project</a>
+            </article>
+            
+            <article class="project_card">
+                <h2 class="project_card_title">APOD Categorizer</h2>
+                <p class="project_card_text">
+                    This was a personal project built in Python with a focus on using the TensorFlow library to
+                    categorize old APOD images as ones I'd like or not.
+                </p>
+                <a class="project_card_link" href="./pages/APODCategorizer/APODCategorizer.html"
+                    aria-label="View APOD Categorizer project">View Project</a>
+            </article>
+
+            <article class="project_card">
+                <h2 class="project_card_title">Pokemon Stat Analysis (Data Science)</h2>
+                <p class="project_card_text">
+                    This was a school group project built in Python for analyzing the win rates of Pokemon teams
+                    based on their multi-dimensional stat centroids.
+                </p>
+                <a class="project_card_link" href="./pages/AdvancedDataScienceProject/AdvancedDataScienceProject.html"
+                    aria-label="View Pokemon Stat Analysis Data Science project">View Project</a>
+            </article>
+
+            <article class="project_card">
+                <h2 class="project_card_title">Pokemon Stat Analysis (Numerical Computation)</h2>
+                <p class="project_card_text">
+                    This was a school project built in Python for analyzing the stat compositions of successful
+                    teams used on Pokemon Showdown.
+                </p>
+                <a class="project_card_link" href="./pages/NumericalProject/NumericalProject.html"
+                    aria-label="View Pokemon Stat Analysis Numerical Computation project">View Project</a>
+            </article>
+
+            <article class="project_card">
+                <h2 class="project_card_title">Robotics Project</h2>
+                <p class="project_card_text">
+                    This was a school group project built in Python where I implemented mapping, path planning, and
+                    localization for a virtual-environment robot.
+                </p>
+                <a class="project_card_link" href="./pages/RoboticsProject/RoboticsProject.html"
+                    aria-label="View Robotics Project">View Project</a>
+            </article>
+
+            <article class="project_card">
+                <h2 class="project_card_title">Machine Learning Project</h2>
+                <p class="project_card_text">
+                    This was a school group project built in Python where I supported data acquisition and cleaning.
+                </p>
+                <a class="project_card_link" href="./pages/MachineLearningProject/MachineLearningProject.html"
+                    aria-label="View Machine Learning Project">View Project</a>
+            </article>
+
+            <article class="project_card">
+                <h2 class="project_card_title">Scouting App</h2>
+                <p class="project_card_text">
+                    This was an extracurricular club project built in HTML that functioned as a complex data
+                    collection app for my robotics team.
+                </p>
+                <a class="project_card_link" href="./pages/ScoutingApp/ScoutingApp.html"
+                    aria-label="View Scouting App project">View Project</a>
+            </article>
+        </section>
     </div>
-    <div class="pikmin" id="pik">
-        86 days
-    </div>
+</body>
+
 </html>
-
-<script>
-    var d = new Date();
-    var month = d.getMonth() + 1;
-    var day = d.getDate() + 1;
-    var hour = d.getHours();
-    var daysLeft = 0;
-    var hoursLeft = 23 - hour;
-    if (month == 10) {
-        daysLeft = 30 - day;
-    } else if (month == 9) {
-        daysLeft = 30 + 30 - day;
-    } else if (month == 8) {
-        daysLeft = 30 + 30 + 31 - day;
-    }
-    console.log("daysLeft: " + daysLeft + ", hoursLeft: " + hoursLeft);
-    document.getElementById("pik").innerHTML = daysLeft + " days, " + hoursLeft + " hours";
-
-    var counter = 0;
-    var loopy = setInterval(function() {
-        counter += 1;
-        if (counter >= 48) {
-            clearInterval(loopy);
-        }
-        var d = new Date();
-        var month = d.getMonth() + 1;
-        var day = d.getDate() + 1;
-        var hour = d.getHours();
-        var daysLeft = 0;
-        var hoursLeft = 23 - hour;
-        if (month == 10) {
-            daysLeft = 30 - day;
-        } else if (month == 9) {
-            daysLeft = 30 + 30 - day;
-        } else if (month == 8) {
-            daysLeft = 30 + 30 + 31 - day;
-        }
-        console.log("daysLeft: " + daysLeft + ", hoursLeft: " + hoursLeft);
-        document.getElementById("pik").innerHTML = daysLeft + " days, " + hoursLeft + " hours";
-    }, 900000);
-</script>
-
-<style>
-    @font-face {
-        font-family: 'pikpik';
-        src: url('pikmin_by_theadorableoshawott-da33cfr.ttf');
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-
-    .imgBox {
-        display: grid;
-        width: 100%;
-    }
-
-    .center-fit {
-        max-width: 100%;
-        max-height: 100%;
-        margin: auto;
-    }
-
-    .pikmin {
-        font-family: 'pikpik';
-        font-size: 100px;
-        color: white;
-        text-align: center;
-        padding-top: 100px;
-        position: fixed;
-        top: 0px;
-        width: 100%;
-    }
-</style>
