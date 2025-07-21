@@ -60,6 +60,10 @@
                 Due to the arrangement of the robot's wheels and some physics-calculation unreliability on the part of the simulation, the robot would frequently rock in movement and lead to the LIDAR sensor occasionally observing the floor.
                 My solution was to implement a sort of confidence metric that resulted in obstacles only being recorded if they were observed numerous times.
             </p>
+            <img src="./RoboticsMapping.png" alt="Mapping Example">
+            <div class="image_caption">
+                An example of the manual mapping method showing observed obstacles with sufficient confidence scores. The yellow line shows the path that the robot has followed.
+            </div>
             <p>
                 The two solutions created for mapping were a manually controlled system and a much more difficult to implement SLAM system.
                 SLAM stands for Simultaneous Localization And Mapping, and uses observed waypoints to more accurately predict the robot's location.
@@ -100,6 +104,10 @@
                 One additional aspect of my resposibility for path planning was to create path following code.
                 I had already developed this code in a previous project for the class that utilized the same robot, so adapting it to follow a generated path was simple.
             </p>
+            <img src="./RoboticsPathing.png" alt="Pathing Example">
+            <div class="image_caption">
+                An example of the path generation and following functionalities. The gray circles show the upcoming waypoints.
+            </div>
         </section>
 
         <section class="card" aria-label="Localization">
