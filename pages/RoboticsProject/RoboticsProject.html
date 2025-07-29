@@ -9,10 +9,15 @@
 </head>
 
 <body>
+    <button class="theme-toggle" aria-label="Toggle dark/light mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+
     <div class="main">
         <div class="page_header_container">
             <h1>
-                Hello, welcome to the Robotics Project page
+                Autonomous Robot Navigation System
             </h1>
             <a class="home_card_link" href="../../index.html" aria-label="View Home Page">
                 Home
@@ -135,6 +140,39 @@
             </p>
         </section>
     </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+        } else if (systemPrefersDark) {
+            html.setAttribute('data-theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
 </body>
 
 </html>

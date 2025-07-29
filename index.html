@@ -9,72 +9,112 @@
 </head>
 
 <body>
+    <button class="theme-toggle" aria-label="Toggle dark/light mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+
     <div class="main">
         <h1>
-            Hello, welcome to Matthew Kind's Projects Page
+            Matthew Kind's Portfolio
         </h1>
         <p>
-            This is the general home page for many of the projects I've worked on in the past, as well as ones I'm currently working on.
-        </p>
-        <p>
-            Below are brief descriptions of each of the projects as well as links to pages with more details.
-        </p>
-        <p>
-            Note that some projects are based on school work, meaning I can't show them in their entirety.
+            Computer Science student specializing in data analysis, machine learning, and autonomous systems.
+            Experienced with Python, NumPy, SciPy, TensorFlow, and robotics algorithms.
         </p>
 
         <section class="project_cards_group" aria-label="Project list">
             <article class="project_card">
                 <h2 class="project_card_title">Audio Visualizer</h2>
                 <p class="project_card_text">
-                    This is my current project where I'm combining MatPlotLib and libROSA to create a typical audio
-                    visualizer across two axes, plus a third axis for time.
+                    Real-time audio analysis system using MatPlotLib and libROSA [[for 2D visualization]].
+                    [[Implements frequency domain analysis with time-series data rendering.]]
                 </p>
                 <a class="project_card_link" href="./pages/AudioVisualizer/AudioVisualizer.html"
-                    aria-label="View Audio Visualizer project">View Project</a>
+                    aria-label="View Audio Visualizer project">View Project →</a>
             </article>
-            
+
             <article class="project_card">
-                <h2 class="project_card_title">APOD Categorizer</h2>
+                <h2 class="project_card_title">APOD Image Categorizer</h2>
                 <p class="project_card_text">
-                    This was a personal project built in Python with a focus on using the TensorFlow library to
-                    categorize old APOD images as ones I'd like or not.
+                    TensorFlow-based classification system for NASA's Astronomy Picture of the Day dataset.
+                    [[Implemented convolutional neural network architecture for automated image preference
+                    categorization.]]
+                    [[add "achieved X% accuracy on test dataset" or something]]
                 </p>
                 <a class="project_card_link" href="./pages/APODCategorizer/APODCategorizer.html"
-                    aria-label="View APOD Categorizer project">View Project</a>
+                    aria-label="View APOD Categorizer project">View Project →</a>
             </article>
 
             <article class="project_card">
-                <h2 class="project_card_title">Pokemon Stat Analysis</h2>
+                <h2 class="project_card_title">Pokemon Competitive Analysis</h2>
                 <p class="project_card_text">
-                    This was a school group project built in Python for analyzing the win rates of Pokemon teams
-                    based on their multi-dimensional stat centroids.
+                    Statistical analysis of Pokemon team compositions using multi-dimensional stat centroids and
+                    win-rate correlation.
+                    [[TODO: add "Processed 1000+ battle records with NumPy and SciPy for competitive meta
+                    evaluation."]]
                 </p>
                 <a class="project_card_link" href="./pages/PokemonStatAnalysis/PokemonStatAnalysis.html"
-                    aria-label="View Pokemon Stat Analysis project">View Project</a>
+                    aria-label="View Pokemon Stat Analysis project">View Project →</a>
             </article>
 
             <article class="project_card">
-                <h2 class="project_card_title">Robotics Project</h2>
+                <h2 class="project_card_title">Autonomous Navigation System</h2>
                 <p class="project_card_text">
-                    This was a school group project built in Python where I implemented mapping, path planning, and
-                    localization for a virtual-environment robot.
+                    Implemented [[SLAM mapping, RRT* path planning, and localization algorithms]] for autonomous
+                    robot
+                    navigation in [[Webots simulation]].
+                    [[Developed FastSLAM integration with custom obstacle detection and confidence scoring.]]
                 </p>
                 <a class="project_card_link" href="./pages/RoboticsProject/RoboticsProject.html"
-                    aria-label="View Robotics Project">View Project</a>
+                    aria-label="View Robotics Project">View Project →</a>
             </article>
 
             <article class="project_card">
-                <h2 class="project_card_title">Scouting App</h2>
+                <h2 class="project_card_title">Robotics Competition Scouting System</h2>
                 <p class="project_card_text">
-                    This was an extracurricular club project built in HTML that functioned as a complex data
-                    collection app for my robotics team.
+                    [[HTML/JavaScript-based]] data collection application for competitive robotics analysis.
+                    Streamlined match data acquisition with real-time statistical computation and team performance
+                    tracking.
                 </p>
                 <a class="project_card_link" href="./pages/ScoutingApp/ScoutingApp.html"
-                    aria-label="View Scouting App project">View Project</a>
+                    aria-label="View Scouting App project">View Project →</a>
             </article>
         </section>
     </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+        } else if (systemPrefersDark) {
+            html.setAttribute('data-theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
 </body>
 
 </html>
