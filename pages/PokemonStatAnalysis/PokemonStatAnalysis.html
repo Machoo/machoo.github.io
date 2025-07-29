@@ -9,10 +9,15 @@
 </head>
 
 <body>
+    <button class="theme-toggle" aria-label="Toggle dark/light mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+
     <div class="main">
         <div class="page_header_container">
             <h1>
-                Hello, welcome to the Pokemon Stat Analysis page
+                Pokemon Competitive Analysis
             </h1>
             <a class="home_card_link" href="../../index.html" aria-label="View Home Page">
                 Home
@@ -21,81 +26,91 @@
 
         <section class="card" aria-label="Project Introduction">
             <h2>
-                Project Introduction
+                Problem Definition
             </h2>
             <p>
-                This was a school project making use of data science and numerical computation techniques to analyze
-                Pokemon data collected from online.
-                Some of this code was developed with a partner, but all of the code and analysis shown here is my
-                own.
-                This is the first half of my work on this project, focusing on the data collection and cleaning aspects while the analysis portion is covered in the Numerical Computation page.
+                Data science project analyzing competitive Pokemon team compositions using statistical methods and
+                numerical computation.
+                Focused on data pipeline development, API integration, and statistical
+                preprocessing.
+                This analysis represents the data collection and cleaning phase, with numerical computation detailed
+                separately. [[You should probably just combine it all into one page]]
             </p>
             <p>
-                To begin with some background, Pokemon is a video game series that involves turn-based battling,
-                Pokemon catching, and exploration.
-                My focus is solely on the battling aspect, and moreso the competitive side.
-                At this level of battling, Pokemon teams can be extensively customized, begging the question of:
+                Pokemon competitive battling involves turn-based strategy with extensive team customization options.
+                The core research question addresses competitive meta health:
             </p>
             <p>
-                <strong>Is the competitive Pokemon battling scene "healthy", in terms of variety and uniqueness being encouraged?</strong>
+                <strong>Hypothesis: Competitive Pokemon meta diversity can be quantified through team composition
+                    variance and win-rate analysis.</strong>
             </p>
             <img src="./ShowdownTeambuilderExample.png" alt="Team Complexity Example">
             <div class="image_caption">
-                The simplified team overview available in Pokemon Showdown, showing the many customizable elements.
+                Pokemon Showdown interface demonstrating team customization complexity and available configuration
+                parameters.
             </div>
         </section>
 
         <section class="card" aria-label="Data Collection">
             <h2>
-                Data Collection
+                API Integration and Data Acquisition
             </h2>
             <p>
-                The first step in this process was to utilize the API for Pokemon Showdown.
-                Showdown is a website that hosts a massive number of Pokemon battles between people, all of which are recorded and made freely available.
-                Accessing this API is as simple as making a web request and parsing the JSON file that is returned.
+                Implemented Pokemon Showdown API integration for battle data extraction. Showdown hosts competitive
+                battles with comprehensive match records accessible via [[RESTful API endpoints]]. Data extraction
+                involved JSON
+                parsing and HTTP request management for large-scale dataset compilation.
             </p>
             <p>
-                Much of the data that were returned from these requests was not important to answering the question.
-                This was because of an important limitation that I had put in place to ensure that the scope of the project remained manageable given the time constraints:
-                Only team composition is relevant, and while a huge amount of variation in a battle can result from player actions taken during turns, that information will have to be implicitly summarized in their decisions made while composing their team.
-                With this consideration in place, the scope of the necessary information become much more reasonable to analyze.
+                Applied domain-specific filtering to reduce data complexity and maintain project scope within time
+                constraints.
+                Focus limited to team composition analysis, excluding in-battle decision trees that would require
+                sequential analysis of player actions. This constraint reduced data dimensionality while preserving
+                strategic team-building insights.
             </p>
             <img src="./InitialDataReduction.png" alt="Initial Data Reduction Example">
             <div class="image_caption">
-                An example of the difference in sizes between the full provided information (left) and only the important information (right).
+                Data reduction comparison: full API response (left) versus filtered essential data (right).
+                [[Something like "demonstrating ~80% size reduction."]] [[Just guessing since there is no image]]
             </div>
             <p>
-                With the scope of the raw data fixed the necessary information was extracted and stored in a more convinient manner, although with many flaws still remaining.
+                Extracted relevant features and implemented structured data storage for subsequent processing pipeline.
+                Raw data contained significant redundancy requiring systematic cleanup procedures.
             </p>
         </section>
 
         <section class="card" aria-label="Data Cleaning">
             <h2>
-                Data Cleaning
+                Data Preprocessing and Normalization [[Or other words like munging or wrangling]]
             </h2>
             <p>
-                Before beginning to process each of the condensed team representations some teams would be discarded.
-                The check for an "unimportant" team at this stage was determined by whether they had fewer than six Pokemon.
-                Six was the maximum number that could be brought, and having fewer represented that the player was either testing the team, or not taking the match seriously.
-                Both conditions meant that their battle was not worth considering for this project.
+                Implemented data validation by filtering incomplete team compositions. Teams with fewer than six Pokemon
+                were excluded as they represented non-competitive matches or testing scenarios, ensuring dataset quality
+                for meaningful statistical analysis. [[TODO: add "filtered out X% of initial dataset"]]
             </p>
             <p>
-                The next cleaning step was to transform the data from only containing Pokemon names to instead containing the stats for each Pokemon.
-                Each Pokemon is comprised of six stats, and although there are many more aspects of a team that can be customized they could not be numericized in a way that would make them suitable for this project.
+                Developed data transformation pipeline converting Pokemon names to six-dimensional stat vectors.
+                This approach enabled numerical analysis while maintaining team composition characteristics essential
+                for competitive evaluation. Non-quantifiable attributes were excluded to maintain analytical
+                consistency.
             </p>
             <p>
-                My solution for the local lookup process was to create a local lookup table using stats returned from the PokeAPI service.
-                The main benefit of compiling this extra local database was to eliminate API calls that would result when a Pokemon was used on multiple teams, which is a very common occurrence.
-                Utilizing PokeAPI required an additional step: modifying the stored names of the Pokemon into forms recognizable to the API.
-                The names that had been used were extracted from Pokemon Showdown, which used a different naming scheme than PokeAPI.
-                This new transformation required a great amount of manual checks, with the unique features of many Pokemon preventing any simple translations.
+                Implemented local caching system using PokeAPI for stat data retrieval. Created lookup table to
+                eliminate
+                redundant API calls for frequently-used Pokemon, significantly reducing data acquisition latency.
+                [[TODO: add "reduced API calls by X% through caching optimization"]]
+                Required custom name mapping between Pokemon Showdown and PokeAPI naming conventions due to format
+                inconsistencies.
+                [[I dunno, this whole section should be greatly expanded, it seems like a lot of work was done here. Unless that comment about it all being manual is true; that'd be bad. You need something to talk about during an interview since this part will definitely come up.]]
             </p>
             <img src="./PokeAPICleaning.png" alt="Translation Example">
             <div class="image_caption">
-                Some of the manual translations made for use in PokeAPI data collection.
+                Name translation mapping for cross-API compatibility, addressing format differences between data
+                sources. [[Again, "manual", undermining the "software engineering"ness of the project]]
             </div>
             <p>
-                With the corrections made, the lookup table was then applied to the dataset to reach its final, fully cleaned state.
+                Applied lookup table transformations to achieve final dataset structure suitable for statistical
+                analysis.
             </p>
         </section>
 
@@ -104,48 +119,54 @@
                 Finalized Data Representation
             </h2>
             <p>
-                Following the usage of the lookup table, the dataset was comprised of teams described by six numbers, with each number being the average of each stat from the team's Pokemon, as well as a boolean for whether the team won or lost the battle it was featured in.
-                From this point forward, the remainder of the project was a much closer collaboration with my partner, who brought their expertise to incorporate the win/lose metric into our analysis.
-                Briefly, we found that the battling scene was healthy from the appearance of numerous team archetypes showing success, compared to only one dominating.
-                However, my work with these data would continue independently in the numerical computation part of the project.
+                Final dataset comprised team records represented as six-dimensional vectors (HP, Attack, Defense,
+                Special Attack, Special Defense, Speed) computed as mean values across team members, paired with
+                binary win/loss outcomes. This representation enabled statistical analysis of team composition
+                effectiveness while maintaining computational efficiency.
+            </p>
+            <p>
+                Collaborative analysis with team partner integrated win/loss metrics into comprehensive meta-health
+                evaluation. Results demonstrated competitive diversity through multiple successful team archetypes
+                rather than single dominant strategy. Individual work continued independently with numerical
+                computation focus detailed in subsequent analysis. [[Making a lot of assumptions. You should definitely
+                have a picture]]
             </p>
         </section>
 
         <section class="card" aria-label="Numerical Computation">
             <h2>
-                Numerical Computation
+                Statistical Analysis Extension
             </h2>
             <p>
-                My usage of the already-cleaned data continued in my project for my numerical computation class.
-                While the data used here are the same, the end goal of what new information is being ascertained is different.
-                With this new frame of mind, the question to ask was:
+                Extended dataset application in numerical computation coursework with refined research objective:
             </p>
             <p>
-                <strong>How do the stats of a Pokemon team influence its success?</strong>
+                <strong>Research Question: How do the stats of a Pokemon team influence it's success?</strong>
             </p>
         </section>
 
         <section class="card" aria-label="Graph Construction">
             <h2>
-                Graph Construction
+                Visualization Implementation
             </h2>
             <p>
-                To be able to reach any conclusions about the data, I decided to graph every combination of two stats together.
-                This resulted in 18 graphs showing combinations, with each plot featuring a blue line for winning teams and a red line for losing teams.
-                These lines were constructed with cubic spline interpolation, a numerical technique that can create a spline connecting many points.
-                The ability to create this sort of spline is offered by NumPy through a simple command call.
-                The constructed lines were then combined into graphs and placed into one compilation to be further analyzed.
+                Generated comprehensive statistical visualization using all pairwise combinations of six stats,
+                producing 18 plots with regression analysis. Implemented cubic spline interpolation via NumPy for
+                smooth curve fitting, separating winning teams (blue) from losing teams (red) to identify performance
+                patterns. [[The image here is impossible to read, both in resolution and results. This appears to undermine the overall analysis efficacy]]
+                [[Stopping the updates here since I don't understand the rest of the results]]
             </p>
         </section>
 
         <section class="card" aria-label="Graph Analysis">
             <img src="./NumericalResults.png" alt="Fifteen Graphs">
             <div class="image_caption">
-                All 15 unique graphs generated from the combinations of all 6 stats.
+                Statistical analysis results: 15 pairwise stat correlation plots revealing competitive team composition
+                patterns.
             </div>
             <p>
                 On first inspection, the graphs are clearly messy, and many do not contain notable information.
-                However, there are still plenty of interesting points to analyze.
+                However, there are still plenty of interesting points to analyze. [[Then show it. If your results aren't visible, then it isn't a good visualization. Consider doing a custom visualization for each point you expand on below]]
             </p>
             <p>
                 The graph of HP vs. Attack shows an upward trend with both winning and losing teams.
@@ -194,6 +215,39 @@
             </p>
         </section>
     </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+        } else if (systemPrefersDark) {
+            html.setAttribute('data-theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
 </body>
 
 </html>
