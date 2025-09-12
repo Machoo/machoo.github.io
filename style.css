@@ -130,3 +130,50 @@ p {
     margin-top: 0.8rem;;
     text-align: center;
 }
+
+/* Styling for ML4DS pages */
+.nav_bar {
+    background: rgb(55, 105, 115);
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+.nav_bar:focus-within,
+.nav_bar:hover {
+    background: rgb(60, 110, 120);
+}
+
+.nav_title {
+    color: rgb(220, 220, 220);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin-bottom: 0.2rem;
+    margin-top: 0.2rem;
+    flex: 1;
+    text-align: left;
+}
+
+.nav_link {
+    align-items: center;
+    background: rgb(160, 180, 180);
+    border-radius: 3px;
+    color: rgb(0, 0, 220);
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    font-size: 1rem;
+    justify-content: center;
+    margin-left: 0.1rem;
+    padding: 0.5rem;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.nav_link:focus-within,
+.nav_link:hover {
+    background: rgb(170, 190, 190);
+    outline: 2px solid rgb(230, 255, 255);
+}
