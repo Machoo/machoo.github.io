@@ -30,10 +30,167 @@
             </h1>
         </div>
 
-        <section class="card" aria-label="Beginning">
+        <section class="card" aria-label="Initial Collection">
             <h2>
-                Data Prep / EDA
+                Initial Data Collection
             </h2>
+            <p>
+                The first collected dataset originates from the NASA Earthdata website, where many datasets across a variety of globally-focused subjects can be found.
+                This dataset is specifically provided by SEDAC, the Socio-Economic Data and Applications Center.
+                The data describe numerous ecological variables by country (or territory) across the world.
+                These are considered indicators towards each country's "Environmental Performance Index" (EPI).
+                Through the Earthdata system, the entire table of values was available for download, following account creation, as a CSV file.
+                From here, the raw data could be simply loaded into a Pandas dataframe. <br>
+                (Note that accessing the dataset itself will require an account, but viewing the page will not.) <br>
+                Source:
+            </p>
+            <code class="wrap">
+                https://www.earthdata.nasa.gov/data/catalog/sedac-ciesin-sedac-epi-2022-2022.00#overview <br><br><br>
+            </code>
+            <p>
+                The second collected dataset originates from Open-Meteo, an open-source meteorological API with a low barrier to entry.
+                This dataset contains climate condition predictions made by various climate models.
+                These "predictions" are made for the past and future in order to ensure that the models match recorded variables.
+                For the time being, the data collected through this API pertain to temperature predictions, although other variables such as wind speed, humidity, and pressure can easily be retrieved and integrated in the future. <br>
+                Source:
+            </p>
+            <code class="wrap">
+                https://open-meteo.com/en/docs/climate-api?latitude=40.01&longitude=105.27&daily=temperature_2m_mean&end_date=2020-12-31 <br><br><br>
+            </code>
+            <p>
+                The Open-Meteo dataset was retrieved using the url below sent with a GET request:
+            </p>
+            <code class="wrap">
+                https://climate-api.open-meteo.com/v1/climate?latitude=40.01&longitude=105.27&start_date=2020-01-01&end_date=2020-12-31&models=CMCC_CM2_VHR4,FGOALS_f3_H,HiRAM_SIT_HR,MRI_AGCM3_2_S,EC_Earth3P_HR,MPI_ESM1_2_XR,NICAM16_8S&daily=temperature_2m_mean
+            </code>
+            <p>
+                To break down this URL, the first specifications are latitude and longitude.
+                These values currently provide results for the CU Boulder campus, but a more widespread analysis can be performed by conglomerating many searches across a larger area.
+                Next, start and end dates were defined, with a maximum range of 1950 to 2050.
+                However, actual predictions of the future are of little concern to this project.
+                Next, the models were included.
+                This includes all 7 of the models that are available to predict mean temperature.
+                Finally, the desired variables are provided.
+                In this case, this only includes mean temperature with a 2 meter resolution.
+            </p>
+            <img src="./Images/DataPrep_Clean_Meteo.png" alt="Table showing the alread-clean Open-Meteo data">
+            <div class="image_caption">
+                A dataframe showing the already-clean data retrieved from Open-Meteo.
+            </div>
+        </section>
+
+        <section class="card" aria-label="Cleaning">
+            <p>
+                The data retrieved from Open-Meteo were already fully cleaned, so no measures needed to be taken there.
+                The dataset from SEDAC contained many errors, although not all of them are addressable.
+                The most common errors were missing values, which were filled in the CSV file with the numbers "-9999", "-8888", or "-7777".
+                The presence of these errors was minimal, so a simple imputation with the feature mean sufficed to handle the missing values.
+                The SEDAC dataset also provided a table to show when different variables were available.
+            </p>
+            <img src="./Images/DataPrep_Temporal_Coverage.png" alt="Table showing the temporal availability of each feature">
+            <div class="image_caption">
+                A table showing the temporal coverage of each feature, including those not available in 2019 or 2020.
+            </div>
+            <p>
+                Given the absence of values within the raw dataset, it appears that this table describes when variables are generally available rather than fully covered.
+                As seen in the table, only 6 variables are not captured in the resulting dataframe; this was determined to be an acceptable loss as the variables are unimportant.
+                In the future, expanding the search to years further in the past could yield these extra features, if that action is deemed necessary.
+            </p>
+            <img src="./Images/DataPrep_Original_Raw_Clean.png" alt="Dataframes showing the integration and cleaning of data for the SEDAC dataset">
+            <div class="image_caption">
+                A series of three dataframes showing the original data split between files, the compiled data for the year 2020 or 2019, and the cleaned data. <br>
+                Note the removal of values such as "-9999" for Andorra.
+            </div>
+            <p>
+                One potential problem remaining in the dataset is the prevalence of zero values.
+                In all circumstances, a zero is acceptable.
+                For example, zero could describe "Fish Caught By Trawling" for a landlocked country, or "Black Carbon Growth Rate" for a country without such emissions.
+                While some zero values may be a representation of missing data, there seems to be no objective way to differentiate these instances from genuine data.
+            </p>
+            <p>
+                The code used to acquire and clean the datasets can be found in this repository:
+            </p>
+            <code class="wrap">
+                https://github.com/Machoo/Regional_Climate_Factor_Analysis
+            </code>
+        </section>
+
+        <section class="card" aria-label="EDA">
+            <h2>
+                Exploratory Data Analysis
+            </h2>
+            <img src="./Images/DataPrep_Violin.png" alt="Violin plot showing all features normalized">
+            <div class="image_caption">
+                A violin plot showing all numeric features normalized.
+            </div>
+            <p>
+                To begin with, the violin plot above shows that many values are near zero.
+                This is due to data points being unrecorded, as well as instances where change-over-time variables were accurately stored as being low.
+                Some of the notable values are CHA ("Methane Growth Rate"), FGA ("Flourinated Gas Growth Rate", aka HFCs), NDA ("Dinitrogen Oxide Growth Rate"), and SDA ("Sulfur Dioxide Growth Rate").
+                Each of these features describe the growth rates of greenhouse gases (methane and dinitrogen monoxide) and pollutants (flourinated gas and sulfur dioxide).
+                Simply put, these values being high are a general confirmation that this dataset is accurate and comprehensive enough to indicate climate change independently.
+            </p>
+        </section>
+
+        <section class="card" aria-label="EDA">
+            <h2>
+                General Data Observations
+            </h2>
+            <img src="./Images/DataPrep_GDPvGHN.png" alt="Scatterplot showing GDP vs GHN">
+            <div class="image_caption">
+                A scatterplot showing GDP vs GHN.
+                There is a general upward trend, aligning with the pattern of industrialized countries emitting more pollutants.
+            </div>
+            <br><br><br>
+            
+            <img src="./Images/DataPrep_RECvGDP.png" alt="Scatterplot showing REC vs GDP">
+            <div class="image_caption">
+                A scatterplot showing REC vs GDP.
+                The pattern shown in this graph is unexpected.
+                Recycling rate is not correlated with GDP, based on the numerous countries with low GDPs and average-or-above recycling rates.
+                This contradicts the assumption that recycling would be more accessible in industrialized, high-GDP countries.
+            </div>
+            <br><br><br>
+
+            <img src="./Images/DataPrep_SDAvSOE.png" alt="Scatterplot showing SDA vs SOE">
+            <div class="image_caption">
+                A scatterplot showing SDA vs SOE.
+                There is a slight trend towards atmospheric sulfur dioxide reducing.
+                In general, sulfur dioxide can help to cool the Earth and offset the greenhouse effect, but it is also detrimental to breathe in. <br>
+                From the graph, it appears that countries with declining SO2 concentrations are also those that are more strongly impacted by its presence as a pollutant.
+                This trend indicates that eco-friendly initiatives are successfully lessening the emission of SO2.
+            </div>
+            <br><br><br>
+            
+            <img src="./Images/DataPrep_OCPvPMD.png" alt="Scatterplot showing OCP vs PMD">
+            <div class="image_caption">
+                A scatterplot showing OCP vs PMD.
+                Note that PM2.5 (particulate matter approximately 2.5 microns across) does not encompass all particulate matter pollution.
+                A large number of countries have zero or nearly zero ocean plastic pollution.
+                In some instances, this is due to plastic waste being shipped to be handled, and potentially deposited in the ocean, elsewhere. <br>
+                The lack of correlation is unexpected, as plastics frequently comprise particulate matter.
+                However, it is still noteworthy that particulate matter exposure seems to have an upper limit regardless of plastic pollution.
+            </div>
+            <br><br><br>
+            
+            <img src="./Images/DataPrep_CHAvTCL.png" alt="Scatterplot showing CHA vs TCL">
+            <div class="image_caption">
+                A scatterplot showing CHA vs TCL.
+                A slight upward correlation would be expected here, due to a global trend for forested areas to be converted into ranchland.
+                Livestock, particularly cattle, introduce a significant amount of the greenhouse gas methane into the atmosphere.
+                Instead of this correlation, there is simply the trend for atmospheric methane concentrations to increase.
+            </div>
+            <br><br><br>
+            
+            <img src="./Images/DataPrep_NXAvVOE.png" alt="Scatterplot showing NXA vs VOE">
+            <div class="image_caption">
+                A scatterplot showing NXA vs VOE.
+                The pattern shown here is interesting, and difficult to explain.
+                Countries with decreasing NOx concentrations already have low VOC exposure, while countries with increasing NOx concentrations have high VOC exposure.
+                This may indicate that countries focusing on reducing NOx concentrations have already reduced their VOC concentrations.
+                This could also be interpreted as an indication that NOx pollutants are a regularly lower priority than VOCs.
+                This may be a question to pursue further.
+            </div>
         </section>
     </div>
 </body>
