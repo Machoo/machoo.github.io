@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PCA - Regional Climate Factor Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<nav class="nav_bar">
+    <div class="nav_title">Regional Climate<br>Factor Analysis</div>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Introduction</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectDataPrepEDA.html">Data Prep/<br>EDA</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectClustering.html">Clustering</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectPCA.html">Principal<br>Component<br>Analysis</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Naive<br>Bayes</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Decision<br>Trees</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Support<br>Vector<br>Machines</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Regression</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Neural<br>Networks</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Conclusions</a>
+</nav>
+
+<body>
+    <div class="main">
+        <div class="page_header_container">
+            <h1>
+                CSCI 5612 Machine Learning for Data Science:<br>Regional Climate Factor Analysis:<br>Principal Component Analysis
+            </h1>
+        </div>
+
+        <section class="card" aria-label="Overview">
+            <h2>
+                Overview
+            </h2>
+            <p>
+                Principal Component Analysis is a method of dimensionality reduction, which can be applied to reduce the number of features in a dataset based on the most "important" descriptors.
+                Within the algorithm itself, the first step is to normalize the data, as PCA would likely malfunction without this accomodation.
+                Next, the covariance matrix of the dataset is constructed.
+                This matrix describes how every pair of variables vary with each other using the covariance formula.
+                From here, two importants variables are calculated together: the eigenvalues and eigenvectors.
+                These values can be found using the cofactor method, which is fairly computationally expensive.
+                Once the eigenpairs are acquired, they can be used to (respectively) describe two important insights into the dataset: the magnitudes and directions of the principal components.
+            </p>
+            <p>
+                The principal components of a dataset describe the most "influential" features, by which most other features can be described.
+                The principal components, being vectors, can be sorted by their magnitudes to produce a list of the most important, or "principal", components.
+                These components form the basis of a new space, which the original dataset can be projected onto.
+                The crucial detail here is that through this projection, the dimensionality of the dataset has been reduced with, hopefully, very little loss of detail.
+                The success of this process can be quantified with the "explained variance" metric, which shows how much of the variance present within the data is described by each component / feature.
+            </p>
+            <img src="./Images/PCA_Explained_Variance.png" alt="PCA Explained Variance graph">
+            <div class="image_caption">
+                The graph showing the explained variance of the features of the dataset, following performing PCA.
+            </div>
+        </section>
+
+        <section class="card" aria-label="Data Preparation">
+            <h2>
+                Data Preparation
+            </h2>
+            <p>
+                PCA has a common limitation: it can only operate on numerical variables.
+                PCA measures the variations of features with each other, which is not possible to accurately measure on nominal or similarly categorical data types.
+                Utilizing PCA is also dependent on having cleaned data without missing values, as these would interfere with the very earliest steps of the algorithm.
+            </p>
+            <img src="./Images/PCA_Sample_data.png" alt="Sample PCA data">
+            <div class="image_caption">
+                The head of a dataframe with all features present for analysis. This sample is available in the link below.
+            </div>
+        </section>
+
+        <section class="card" aria-label="Code">
+            <h2>
+                Code Implementation
+            </h2>
+            <p>
+                The code used to perform Principal Component Analysis can be found in this file:
+            </p>
+            <code class="wrap">
+                https://github.com/Machoo/Regional_Climate_Factor_Analysis/blob/main/PCA.ipynb
+            </code>
+        </section>
+
+        <section class="card" aria-label="Results">
+            <h2>
+                Results
+            </h2>
+            <p>
+                The results of PCA on the environmental factors dataset is largely not actionable.
+                The graph below shows that there is no clear cutoff that would preserve a significant-enough amount of explainability, while removing enough features to be worthwhile.
+                At the arbitrary cutoff there are 16 remaining features, but this number very quickly increases if any more accuracy is desired.
+            </p>
+            <img src="./Images/PCA_Explained_Variance.png" alt="PCA Explained Variance graph">
+            <div class="image_caption">
+                The graph showing the explained variance of the features of the dataset, following performing PCA. Cutting the dataset at the threshold would retain 16 features.
+            </div>
+            <p>
+                As an example, the graph below shows the two most important components plotted against each other.
+                This scatterplot shows the most common trend throughout the data, mostly focusing on the combination of change-over-time and concentration variables.
+            </p>
+            <img src="./Images/PCA_Scatterplot_Example.png" alt="PCA scatterplot">
+            <div class="image_caption">
+                The scatterplot showing the two most important principal components.
+            </div>
+        </section>
+
+        <section class="card" aria-label="Conclusion">
+            <h2>
+                Conclusion
+            </h2>
+            <p>
+                Due to the sub-optimal results of PCA seen in the explained variance graph, this method will not be used to reduce the dimensionality of the dataset.
+                One important additional factor to consider is the unusual shape of this dataset, which has approximately 220 entries and 60 features.
+                A more typical dataset would have far more entries and fewer features.
+                In this situation, PCA would likely be far more applicable.
+                As it stands, however, the dataset will remain as it is for future analysis.
+            </p>
+        </section>
+    </div>
+</body>
+
+</html>
