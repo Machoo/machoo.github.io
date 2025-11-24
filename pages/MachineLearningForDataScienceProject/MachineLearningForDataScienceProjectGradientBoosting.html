@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gradient Boosting - Regional Climate Factor Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<nav class="nav_bar">
+    <div class="nav_title">Regional Climate<br>Factor Analysis</div>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Introduction</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectDataPrepEDA.html">Data Prep/<br>EDA</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectClustering.html">Clustering</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectPCA.html">Principal<br>Component<br>Analysis</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectNaiveBayes.html">Naive<br>Bayes</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectDecisionTrees.html">Decision<br>Trees</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectGradientBoosting.html">Gradient<br>Boosting</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Conclusions</a>
+</nav>
+
+<body>
+    <div class="main">
+        <div class="page_header_container">
+            <h1>
+                CSCI 5612 Machine Learning for Data Science:<br>Regional Climate Factor Analysis:<br>Gradient Boosting
+            </h1>
+        </div>
+
+        <section class="card" aria-label="Overview">
+            <h2>
+                Overview
+            </h2>
+            <p>
+                Ensemble methods make use of many weak learners to make predictions.
+                The weak learners used in these models are pureposefully made to not be highly performant.
+                Instead, weak learners are very simple models such as short decision trees.
+                While this simplicity helps with lowering computation time, the primary reason for this is to prevent overfitting from many individual trees.
+                With many trained weak learners, the ensemble method will combine their predictions into one final predictions, either by using the simple majority vote or by weighting each model's vote.
+            </p>
+            <img src="./Images/Boosting_Visualization_1.png" alt="Boosting general example">
+            <div class="image_caption">
+                A simple depiction of the weak learner combination performed by ensemble methods.
+            </div>
+            <p>
+                Boosting is a type of ensemble method that modifies how each weak learner is trained in order to improve the final performance.
+                There are three prominent types of boosting: <br>
+                • AdaBoost: When weak learners are trained with the Adaptive Boosting method, the incorrectly classified samples of each previous model are assigned higher weights such that the following model will be more likely to address (and correctly classify) those points. <br>
+                • Gradient Boosting: Rather than implementing weights onto difficult samples, this method trains weak learner on the residuals of samples.
+                Residuals are the difference between a prediction and the real sample, and are used with the gradient descent process to minimize loss.
+                When used with an ensemble model, these differences will be largest where weak learners fail to classify samples, indicating where further training is needed. <br>
+                • XGBoost: Extreme Gradient Boosting improves upon standard boosting by implementing stronger regularization (using the L2-norm), using multi-threading in tree construction, and applying Newton-Raphson for optimization.
+            </p>
+            <p>
+                Each of these methods share some similar hyperparameters:<br>
+                • Learning rate: How much importance is given to each new tree trained as part of an ensemble.
+                The importances of subsequent trees tend to decrease as more difficult samples are resolved. <br>
+                • Number of estimators: This is the number of weak learners (usually small decision trees) to be used in the ensemble.
+                Typically a higher number will result in better predictions, but this could also lead to overfitting. <br>
+                • Max tree depth: The maximum number of layers (or decisions) that a weak learner tree is permitted to have.
+                If the tree would be trained to have more layers, it would instead be stopped early.
+                This saves on computing time and lessens overfitting.
+            </p>
+            <img src="./Images/Boosting_Visualization_2.png" alt="Boosting general example">
+            <div class="image_caption">
+                A simple depiction of the weak learner combination performed by boosting methods, where following weak learners improve on the previous.
+            </div>
+        </section>
+
+        <section class="card" aria-label="Data Preparation">
+            <h2>
+                Data Preparation
+            </h2>
+            <p>
+                This operation makes use of a slightly updated dataset from that used in the unsupervised methods.
+                The dataset has an additional column (the "target variable") that lists the ND-GAIN Index for each country.
+                This is a score of each country's vulnerability and readiness for climate change effects, developed by the Notre Dame Global Adaptation Initiative using their own methods.
+                In order for these scores to be usable for classification, they are instead encoded as follows: <br>
+                • A score between 60-100 means "low" risk <br>
+                • A score between 40-60 means "normal" risk <br>
+                • A score between 0-40 means "high" risk <br>
+                The record of scores for 2022 were incomplete, meaning the number of countries in the current dataset is reduced from 220 to 187.
+                The new data was sourced from here:
+            </p>
+            <code class="wrap">
+                https://gain.nd.edu/our-work/country-index/ <br><br>
+            </code>
+            <img src="./Images/NaiveBayes_Sample_Data.png" alt="Sample decision tree data">
+            <div class="image_caption">
+                The head of a dataframe (with most features hidden) for use in gradient boosting. This sample is available in the link below.
+            </div>
+            <p>
+                In addition to the labeled data, supervised learning requires datasets to be split into training and testing sets.
+                Doing so enables a model to be trained on one and have it accuracy be tested on the other.
+                If the splits were not created, there would be no reliable method to determine how accurate the trained model really is.
+            </p>
+        </section>
+
+        <section class="card" aria-label="Code">
+            <h2>
+                Code Implementation
+            </h2>
+            <p>
+                The code used to perform gradient boosting can be found in this file:
+            </p>
+            <code class="wrap">
+                https://github.com/Machoo/Regional_Climate_Factor_Analysis/blob/main/boosting.ipynb
+            </code>
+        </section>
+
+        <section class="card" aria-label="Results">
+            <h2>
+                Results
+            </h2>
+            <p>
+                The completed gradient boosted models generally performed poorly.
+                Increasing the hyperparameters resulted in improved performance, but none of these early models were able to exceed 0.73 accuracy.
+                The following confusion matrices show the model trained with default hyperparameters, as well as the best performing models when each hyperparameter was tuned.
+            </p>
+            <img src="./Images/Boosting_Confusion_Matrix_1.png" alt="Confusion matrix resulting from gradient boosting">
+            <div class="image_caption">
+                Confusion matrix resulting from gradient boosting predictions with default parameters. <br>
+                Accuracy = 0.63 <br>
+                The value 1 corresponds to "low", 2 to "normal", and 0 to "high". <br><br><br>
+            </div>
+            <img src="./Images/Boosting_Confusion_Matrix_2.png" alt="Confusion matrix resulting from gradient boosting">
+            <div class="image_caption">
+                Confusion matrix resulting from gradient boosting predictions with learning_rate = 0.5. <br>
+                Accuracy = 0.68 <br>
+                The value 1 corresponds to "low", 2 to "normal", and 0 to "high". <br><br><br>
+            </div>
+            <img src="./Images/Boosting_Confusion_Matrix_3.png" alt="Confusion matrix resulting from gradient boosting">
+            <div class="image_caption">
+                Confusion matrix resulting from gradient boosting predictions with n_estimators = 1000. <br>
+                Accuracy = 0.65 <br>
+                The value 1 corresponds to "low", 2 to "normal", and 0 to "high". <br><br><br>
+            </div>
+            <img src="./Images/Boosting_Confusion_Matrix_4.png" alt="Confusion matrix resulting from gradient boosting">
+            <div class="image_caption">
+                Confusion matrix resulting from gradient boosting predictions with max_depth = 1. <br>
+                Accuracy = 0.73 <br>
+                The value 1 corresponds to "low", 2 to "normal", and 0 to "high". <br><br><br>
+            </div>
+            <img src="./Images/Boosting_Confusion_Matrix_5.png" alt="Confusion matrix resulting from gradient boosting">
+            <div class="image_caption">
+                Confusion matrix resulting from gradient boosting predictions with min_samples_split = 20. <br>
+                Accuracy = 0.68 <br>
+                The value 1 corresponds to "low", 2 to "normal", and 0 to "high".<br><br><br>
+            </div>
+            <img src="./Images/Boosting_Confusion_Matrix_6.png" alt="Confusion matrix resulting from gradient boosting">
+            <div class="image_caption">
+                Confusion matrix resulting from gradient boosting predictions with learning_rate = 0.09, n_estimators = 40, max_depth = 1, min_samples_split = 2. <br>
+                Accuracy = 0.84 <br>
+                The value 1 corresponds to "low", 2 to "normal", and 0 to "high".
+            </div>
+            <p>
+                The final model trained was optimized over each of the parameters tested above.
+                Its accuracy of 0.84 is acceptable, as this value does not indicate any hidden overfitting but does reach an acceptable level.
+            </p>
+        </section>
+
+        <section class="card" aria-label="Conclusion">
+            <h2>
+                Conclusion
+            </h2>
+            <p>
+                The gradient boosting model seemed to be a good fit for this dataset.
+                The performance from boosting, and particularly after hyperparameter tuning, is variably better than in previous methods.
+                With boosting models, hyperparameters play a large part in multiple aspects of the models behavior.
+                The learning rate variable can improve the speed that the model trains, but can lead to more erratic problems appearing.
+                The number of estimators being higher usually increases training time and accuracy, but that pattern was not maintained with the tests shown above.
+                The max depth variable is the most difficult to correctly define, as too high of a value tends to result in overfitting while too low of a value would ordinarily result in underfitting and strong inaccuracy.
+                Overall, the selections of hyperparameters used above do not represent the usual patterns that would lead to the best model performance.
+                The greatest improvements that could be made here would likely be through the XGBoost model, as well as extensive hyperparameter tuning with it.
+            </p>
+        </section>
+    </div>
+</body>
+
+</html>
