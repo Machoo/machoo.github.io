@@ -17,7 +17,9 @@
     <a class="nav_link" href="./MachineLearningForDataScienceProjectNaiveBayes.html">Naive<br>Bayes</a>
     <a class="nav_link" href="./MachineLearningForDataScienceProjectDecisionTrees.html">Decision<br>Trees</a>
     <a class="nav_link" href="./MachineLearningForDataScienceProjectGradientBoosting.html">Gradient<br>Boosting</a>
-    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Conclusions</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectResults.html">Results</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectChallenges.html">Project<br>Challenges</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectConclusion.html">Conclusion</a>
 </nav>
 
 <body>
@@ -75,29 +77,57 @@
                 These patterns could also show worsening conditions, or many other more nuanced outcomes.
                 The usage of these variables offers critical information about environmental factors that are not typically captured by weather-focused systems and models.
             </p>
+            <p>
+                In addition to the variables made available by the EPI, the ND-GAIN Index is heavily considered for this project.
+                This score is a representation of a country's vulnerability to and readiness for climate change.
+                The score is computed by the Notre Dame Global Adaptation Initiative, but the methods used by them are not considered here.
+                Instead, the interest is in attempting to predict the ND-GAIN Index using the EPI variables without needing to rely on the original inputs.
+                Through this effort, new predictions can be made and provided to at-risk countries when some data is missing.
+            </p>
         </section>
 
         <section class="card" aria-label="Questions">
+            <h1>
+                Q&A
+            </h1>
             <p>
-                This introduction leads to a series of questions that further analysis will focus on:
-            </p>
-            <p>
-                • How do pollutants and ecological determinants influence climatic conditions across locations worldwide today? <br>
-                • How have these same factors influenced climatic conditions across regions throughout the past? <br>
-                • How do these influences vary by location?
+                <b>• How do pollutants and ecological determinants influence climatic conditions across locations worldwide today?</b> <br>
+                &nbsp; Pollutants and similar ecological variables are generally tied to worsening climate change conditions; notably, many pollutants are also greenhouse gases that contribute to global warming. <br>
+                <b>• How have these same factors influenced climatic conditions across regions throughout the past?</b> <br>
+                &nbsp; Pollutants concentrations are primarily increasing, leading to the worst effects being most recent.
+                However, some countries are reducing their emissions of pollutants, meaning their exposure rates are improving. <br>
+                <b>• How do these influences vary by location?</b> <br>
+                &nbsp; This question is not particularly answerable, even with data to analyze.
+                Air pollutants in particular will move based on complex atmospheric phenomena, meaning that a country's current concentrations of pollutants is also heavily dependent on the countries near it. <br>
                 Are there differences in severity based on factors such as latitude, distance to a coast, or prevailing winds? <br>
-                • Do socio-economic factors of a country, such as its GDP, correlate to its emissions and general ecological impact?
-                How strong are the correlations, or how impactful are their absences? <br>
-                • How accurate are climate models, including ensembles, in predicting global conditions in recent years? <br>
-                • How accurate are climate models in predicting conditions in regions that they are specialized for? <br>
-                • How inaccurate are climate models in predicting conditions in regions with different conditions than the ones that they are specialized for?
-                Are the insufficiencies outweighed by improved performance in the local region? <br>
-                • Do climate models perform best in recent years?
-                Do they fail to predict past conditions as well as they predict current conditions? <br>
-                • Do various climate models fail to predict similar conditions?
-                Are there groupings of models that can show underlying similarities, either in how they were constructed or in the circumstances that they are tuned for? <br>
-                • How much do ensembles of climate models improve accuracy overall?
-                How do ensemble models perform in areas that individual models are tuned for?
+                <b>• Do socio-economic factors of a country, such as its GDP, correlate to its emissions and general ecological impact?
+                How strong are the correlations, or how impactful are their absences?</b> <br>
+                &nbsp; There is a clear direct correlation between GDP and carbon dioxide emissions, as well as a less strong correlation with other pollutants.
+                This is likely due to higher GDPs being attained at the expense of more industry and technology producing harmful by-products. <br>
+                <b>• How accurate are climate models, including ensembles, in predicting global conditions in recent years?</b> <br>
+                &nbsp; They have respectable accuracy.
+                Using the ND-GAIN as a measure of global conditions, models were able to achieve approximately 80% accuracy in predicting a country's risk from climate change. <br>
+                <b>• How accurate are climate models in identifying patterns between countries' emissions and exposure rates?</b> <br>
+                &nbsp; Fairly accurate.
+                This is despite the available data being large-scale, rather than being granular enough to observe the specific emissions of various pollutants and the affected locations. <br>
+                <b>• How inaccurate are climate models in predicting conditions in systems with different conditions than the ones that they are specialized for?
+                Are the insufficiencies outweighed by improved performance in the local system?</b> <br>
+                &nbsp; This question was not directly addressed as part of this project, although it is touched on more in the Challenges tab.
+                This would require a much deeper analysis of the objective system of the EPI, as well as the construction of ensemble models. <br>
+                <b>• Do climate models perform best in recent years?
+                Do they fail to predict past conditions as well as they predict current conditions?</b> <br>
+                &nbsp; This question was not directly addressed as part of this project, although it is touched on more in the Challenges tab.
+                Simply put, data collection in the past was insufficient to be able to create reliable models. <br>
+                <b>• Do various climate models fail to predict similar conditions?
+                Are there groupings of models that can show underlying similarities, either in how they were constructed or in the circumstances that they are tuned for?</b> <br>
+                &nbsp; Yes.
+                Most notably, the decision tree model had a relatively poor F1-score compared to the other supervised models, but instead perfectly predicted whether a country was at high risk from climate change.
+                The gradient boosting model showed a similar propensity, but was also able to provide better predictive power in general. <br>
+                <b>• How much do ensembles of climate models improve accuracy overall?
+                How do ensemble models perform in areas that individual models are tuned for?</b> <br>
+                &nbsp; A strong amount.
+                The gradient boosting model performed best out of everything trained and tested.
+                It achieved the highest F1-score (as well as other metrics) and mostly maintained the high-risk predictive power of the decision tree model.
             </p>
         </section>
     </div>

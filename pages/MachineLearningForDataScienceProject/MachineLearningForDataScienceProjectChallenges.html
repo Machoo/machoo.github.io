@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Challenges - Regional Climate Factor Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<nav class="nav_bar">
+    <div class="nav_title">Regional Climate<br>Factor Analysis</div>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Introduction</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectDataPrepEDA.html">Data Prep/<br>EDA</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectClustering.html">Clustering</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectPCA.html">Principal<br>Component<br>Analysis</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectNaiveBayes.html">Naive<br>Bayes</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectDecisionTrees.html">Decision<br>Trees</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectGradientBoosting.html">Gradient<br>Boosting</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectResults.html">Results</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectChallenges.html">Project<br>Challenges</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectConclusion.html">Conclusion</a>
+</nav>
+
+<body>
+    <div class="main">
+        <div class="page_header_container">
+            <h1>
+                CSCI 5612 Machine Learning for Data Science:<br>Regional Climate Factor Analysis:<br>Challenges
+            </h1>
+        </div>
+
+        <section class="card" aria-label="Cleaning Challenges">
+            <p>
+                This page will cover some of the same information as the Results page, which included an analysis of the outputs and performances of the models used in this project.
+                For this section however, there will be a deeper look at the supervised learning models.
+                The work done before this point, encompassing Clustering and PCA, was relatively lackluster.
+                Its coverage on the Results page is as much attention as should be given to it, based on the usefulness of its results.
+            </p>
+            <p>
+                The first challenge to discuss is the data cleaning process.
+                Compared to some other datasets, even those used in class for assignments, the EPI dataset was not difficult to prepare.
+                An early decision was made to reduce the dataset from a time series, going back to 1990 with increasingly sparse data collection, into a single snapshot of the years 2019-2020.
+                This provided the widest coverage of features and allowed the project to focus on one year, rather than spreading the attention to time series analysis.
+                Following the aggregation of each of the features into one dataframe, the cleaning process was comprised of: <br>
+                • Replacing obviously incorrect values, such as -9999. <br>
+                • Filling NA values with the column mean (as removing any rows would mean removing an entire country's representation). <br>
+                • Dropping completely empty columns, which was not a substantial difference.
+            </p>
+            <p>
+                An addition was made to the dataframe by the time that supervised learning was started: the ND-GAIN Index.
+                This score measured a country's vulnerability to and readiness for climate change, and proved to be a more relevant, applicable, and interesting target variable compared to climate model predictions.
+                This score was trivial to obtain and add to the dataframe though, as it is made easily accessible by Notre Dame.
+            </p>
+        </section>
+
+        <section class="card" aria-label="Supervised Challenges">
+            <p>
+                The supervised learning models presented fairly few challenges.
+                The dataset was already cleaned, and features were easily handled by each of the models.
+                Simple transformers, such as for encoding labels, were used without difficulty.
+                The greatest challenge came in assessing the models.
+                As discussed on the results page, each model presented a different sort of specialization in predicting a country's risk according to the ND-GAIN Index.
+                Solely going by the performance metrics of each model, the Decision Tree performed worst (F1-score 0.76), the Naive Bayes model performed moderately well (F1-score 0.81), and the Gradient Boosting model performed best (F1-score 0.84).
+                However, this did not capture the detail that the decision tree had perfect performance in predicting whether a country would be at high risk from climate change.
+                This is an important prediction to be able to make, which meant that the decision tree was given more importance than its meager performance metrics would have indicated.
+                Each of the models were extensively tuned to optimize their performance, and of the tests conducted with the Decision Tree and Gradient Boosting models, their highest metric-based performances coincided with predicting high risk extremely well.
+                Seeing a specialization in another category with these models would have represented a substantial loss in predictive power compared to the finals forms shown for this project.
+            </p>
+            <p>
+                Overall, this project was not held back by substantial technical challenges.
+                The initial dataset and ND-GAIN feature were not the intended focus of the project, which led to confusion in the initial stages of the project.
+                However, these datasets proved to be much more novel and interesting to analyze than the original idea, based on simple climate statistics, likely would have been.
+                Otherwise, the surprise described above and elsewhere with the unique results of the supervised learning models presented something of a challenge for analysis and the determination of real model performance as opposed to metric-based analysis.
+            </p>
+        </section>
+    </div>
+</body>
+
+</html>

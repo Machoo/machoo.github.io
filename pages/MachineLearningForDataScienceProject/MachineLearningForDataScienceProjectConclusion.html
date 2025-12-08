@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Conclusion - Regional Climate Factor Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<nav class="nav_bar">
+    <div class="nav_title">Regional Climate<br>Factor Analysis</div>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectIntroduction.html">Introduction</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectDataPrepEDA.html">Data Prep/<br>EDA</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectClustering.html">Clustering</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectPCA.html">Principal<br>Component<br>Analysis</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectNaiveBayes.html">Naive<br>Bayes</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectDecisionTrees.html">Decision<br>Trees</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectGradientBoosting.html">Gradient<br>Boosting</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectResults.html">Results</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectChallenges.html">Project<br>Challenges</a>
+    <a class="nav_link" href="./MachineLearningForDataScienceProjectConclusion.html">Conclusion</a>
+</nav>
+
+<body>
+    <div class="main">
+        <div class="page_header_container">
+            <h1>
+                CSCI 5612 Machine Learning for Data Science:<br>Regional Climate Factor Analysis:<br>Conclusion
+            </h1>
+        </div>
+
+        <section class="card" aria-label="Future Work">
+            <p>
+                Following the completion of this project, there are two primary ideas for future work that could be performed to get novel results:
+            </p>
+            <p>
+                Creating an ensemble model with special sub-models may lead to greatly improved performance.
+                The original EPI dataset is broken into "policy objective" categories.
+                Creating a model for each of these categories, then producing a combination of them, could lead to greater overall predictive power in addition to the improved granularity of predictions.
+            </p>
+            <p>
+                Looking at the original time series version of the EPI data may result in new insights.
+                Having explored a recent snapshot of the pollution data, it may be worthwhile in the future to re-structure the dataset to produce a new system that could be analyzed over time.
+                This may yield new results, but there is a high likelihood that it would simply show that pollution is on the rise.
+            </p>
+        </section>
+
+        <section class="card" aria-label="General Conclusion">
+            <p>
+                This project was, overall, an unconventional success.
+                The results of the supervised learning models proved to be an interesting case to analyze, which offered personal learning experience.
+                The generally good performance of those models also led to one subtle question being answered, in the end:
+                Could the ND-GAIN Index be approximated without having or even knowing the original factors used to compute it?
+                The answer seems to be yes; this is notable for enabling the score to be approximated by the models shown here without needing to rely on the original data used to compute it.
+                In the event that some data was missing, and that a prediction would be useful before that data was collected, these models would be useful to determine whether a country was at high risk or not.
+            </p>
+        </section>
+    </div>
+</body>
+
+</html>
